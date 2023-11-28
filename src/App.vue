@@ -1,19 +1,34 @@
 <template>
   <div id="app">
     <h1>Jeu du mot</h1>
-    <button @click="startGame">Démarrer une Partie</button>
+    <word-input @submit-word="handleWordSubmit"></word-input>
     <button @click="showStats">Statistiques</button>
     <div class="info-section">
-      <p>Bienvenue dans le Jeu du mot! Trouvez le mot mystère en 5 tentatives.</p>
+      <p>Bienvenue dans le Jeu du mot! Trouvez le mot mystère en 6 tentatives.</p>
     </div>
   </div>
 </template>
 
 <script>
 
+import WordInput from './components/WordInput.vue';
+
 export default {
   name: 'App',
+  components: {
+    WordInput
+  },
+  methods: {
+    handleWordSubmit(word) {
+      // Logique pour gérer le mot soumis
+      console.log("Mot soumis:", word);
+    },
+    showStats() {
+      // Logique pour afficher les statistiques
+    }
+  }
 }
+
 </script>
 
 
