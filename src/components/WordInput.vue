@@ -13,33 +13,44 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
     name: 'WordInput',
     data() {
-    return {
-        word: '',
-        error: false,
-        errorMessage: ''
-    };
+        return {
+            word: '',
+            error: false,
+            errorMessage: '',
+            api_response: ''
+        };
     },
     methods: {
-    validateInput() {
-        // Vérifier si le mot est composé uniquement de lettres et a 5 caractères
-        if (!/^[a-zA-Z]{5}$/.test(this.word)) {
-        this.error = true;
-        this.errorMessage = 'Le mot doit être composé de 5 lettres';
-        } else {
-        this.error = false;
-        this.errorMessage = '';
-        }
-    },
-    submitWord() {
-        // Soumettre le mot si valide
-        if (!this.error && this.word.length === 5) {
-        this.$emit('submit-word', this.word);
-        this.word = ''; // Réinitialiser après la soumission
-        }
-    }
+        validateInput() {
+            // Vérifier si le mot est composé uniquement 5 lettres
+            if (!/^[a-zA-Z]{5}$/.test(this.word)) {
+            this.error = true;
+            this.errorMessage = 'Le mot doit être composé de 5 lettres';
+            } else {
+            this.error = false;
+            this.errorMessage = '';
+            }
+        },
+        submitWord : async function () {
+            // Soumettre le mot si valide
+            if (!this.error && this.word.length === 5) {
+            this.$emit('submit-word', this.word);
+            axios
+                .post('https://vue-project-backend-eta.vercel.app/api/check-word ', { 
+                    "word" : this.word
+                })
+                .then(response => {
+                    this.api_response = response.data; console.log(this.api_response);
+                })
+            }
+            this.word = ''; 
+        },
     }
 };
 </script>
