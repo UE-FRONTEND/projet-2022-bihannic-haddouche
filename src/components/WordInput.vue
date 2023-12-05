@@ -15,6 +15,8 @@
 <script>
 
 import axios from 'axios';
+import Keyboard from 'simple-keyboard';
+import 'simple-keyboard/build/css/index.css';
 
 export default {
     name: 'WordInput',
