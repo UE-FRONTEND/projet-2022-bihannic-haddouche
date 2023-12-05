@@ -1,19 +1,12 @@
 <template>
 
- <!-- <div>
+ <div>
     <router-link to="/jeu" tag="button" id="btn-demarrer-partie" class="bg-blue-600 px-4 py-2 text-white text-center rounded font-bold shadow">
       Demarrer une partie
     </router-link>
-  </div>-->
-  <div id="app">
-    <chronometre/>
-    <h1>Jeu du mot</h1>
-    <word-input @submit-word="handleWordSubmit"></word-input>
-    <button @click="showStats">Statistiques</button>
-    <div class="info-section">
-      <p>Bienvenue dans le Jeu du mot! Trouvez le mot mystère en 6 tentatives.</p>
-    </div>
   </div>
+  <router-view></router-view>
+
 </template>
 
 <script>
