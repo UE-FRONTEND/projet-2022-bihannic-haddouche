@@ -37,21 +37,20 @@ export default {
             this.errorMessage = '';
             }
         },
-        submitWord() {
+        submitWord : async function () {
             // Soumettre le mot si valide
             if (!this.error && this.word.length === 5) {
             this.$emit('submit-word', this.word);
-            this.word = ''; // Réinitialiser après la soumission
-            verifyWord()
-            }
-        },
-        async verifyWord() {
             axios
-                .get('https://vue-project-backend-eta.vercel.app')
-                .then(response => {this.api_response = response.data})
-
-            console.log(api_response);
-        }
+                .post('https://vue-project-backend-eta.vercel.app/api/check-word ', { 
+                    "word" : this.word
+                })
+                .then(response => {
+                    this.api_response = response.data; console.log(this.api_response);
+                })
+            }
+            this.word = ''; 
+        },
     }
 };
 </script>
