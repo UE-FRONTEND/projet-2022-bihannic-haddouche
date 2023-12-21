@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Jeu du mot</h1>
     <h3>Mokrane Hadouche, Lucas Bihannic TP51</h3>
-    <word-input @submit-word="handleWordSubmit"></word-input>
+    <game @submit-word="handleWordSubmit"></game>
     <button @click="showStats">Statistiques</button>
     <div class="info-section">
       <p>Bienvenue dans le Jeu du mot! Trouvez le mot mystère en 6 tentatives.</p>
@@ -12,12 +12,12 @@
 
 <script>
 
-import WordInput from './components/WordInput.vue';
+import Game from './components/Game.vue';
 
 export default {
   name: 'App',
   components: {
-    WordInput
+    Game
   },
   methods: {
     handleWordSubmit(word) {

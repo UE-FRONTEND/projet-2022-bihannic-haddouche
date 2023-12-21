@@ -1,4 +1,5 @@
 <template>
+    <WordFetcher @new-word="setRandomWord"/>
     <div class="word-input">
     <input
         type="text"
@@ -19,12 +20,14 @@
 
 import axios from 'axios';
 import Keyboard from "./Keyboard";
+import WordFetcher from "./WordFetcher";
 import 'simple-keyboard/build/css/index.css';
 
 export default {
-    name: 'WordInput',
+    name: 'Game',
     components: {
-    Keyboard
+    Keyboard,
+    WordFetcher
     },
     data() {
         return {
@@ -72,6 +75,10 @@ export default {
             }
             console.log("button", button);
         },
+        setRandomWord(word) {
+        // Traitez le mot aléatoire récupéré ici
+        console.log("Mot aléatoire reçu:", word);
+    }
     }
 };
 </script>
