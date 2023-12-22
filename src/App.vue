@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Jeu du mot</h1>
-    <h3>Mokrane Hadouche, Lucas Bihannic TP51</h3>
+    <h3>Mokrane Haddouche, Lucas Bihannic TP51</h3>
     <game @submit-word="handleWordSubmit"></game>
     <button @click="showStats">Statistiques</button>
     <div class="info-section">
