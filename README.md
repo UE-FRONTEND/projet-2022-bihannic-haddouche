@@ -1,6 +1,6 @@
 # Projet Front
 
-## Members: HADDOUCHE Mokrane , BIHANIC Lucas
+## Members: HADDOUCHE Mokrane , BIHANNIC Lucas
 
 ### TP group : 
 - [ ] TPA41
