@@ -63,50 +63,48 @@ export default {
 };
 </script>
 
-<!-- Ajoutez votre style ici -->
 <style>
-
 .word-input {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    background-color: #f9f9f9;
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
 }
 
 .word-input input {
-    width: 100%;
-    padding: 12px 15px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 18px;
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 18px;
 }
 
 .word-input button {
-    width: 100%;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 18px;
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 .word-input button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 .word-input p {
-    min-height: 20px;
-    font-size: 16px;
-    text-align: left;
-    margin-top: 10px;
+  min-height: 20px;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
 }
-
 </style>
