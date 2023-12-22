@@ -63,7 +63,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .word-input {
   max-width: 400px;
   margin: auto;
@@ -106,5 +106,13 @@ export default {
   font-size: 16px;
   text-align: center;
   margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+}
+
+.valid-message {
+  color: green;
 }
 </style>

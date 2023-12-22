@@ -33,9 +33,6 @@
       onKeyPress(button) {
         this.$emit("onKeyPress", button);
   
-        /**
-         * If you want to handle the shift and caps lock buttons
-         */
         if (button === "{shift}" || button === "{lock}") this.handleShift();
       },
       handleShift() {
@@ -58,19 +55,5 @@
 
 <style scoped>
 
-
-.simple-keyboard {
-    margin-top: 20px;
-}
-
-.simple-keyboard .hg-button {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    margin: 5px;
-}
-
-.simple-keyboard .hg-button:active {
-    background-color: #d0d0d0;
-}
-  </style>
+</style>
   
