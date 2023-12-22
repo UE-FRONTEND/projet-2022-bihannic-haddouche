@@ -79,7 +79,7 @@ export default {
 
 
 
-<style>
+<style scoped>
 .game-container {
   max-width: 600px;
   margin: auto;
@@ -89,14 +89,6 @@ export default {
 
 .word-attempts {
   margin-top: 20px;
-}
-
-.error-message {
-  color: red;
-}
-
-.valid-message {
-  color: green;
 }
 
 .popup {
@@ -112,12 +104,23 @@ export default {
   z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
 }
 
-.popup p {
-  margin: 0 0 10px 0;
+.popup button {
+  background-color: #4CAF50; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte */
+  padding: 10px 15px; /* Padding autour du texte */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Bordures arrondies */
+  cursor: pointer; /* Change le curseur pour indiquer qu'il s'agit d'un bouton cliquable */
+  font-size: 16px; /* Taille de la police */
+  transition: background-color 0.3s; /* Transition pour l'effet de survol */
 }
 
-.popup button {
-  /* Style pour votre bouton */
+.popup button:hover {
+  background-color: #45a049; /* Changement de couleur lors du survol */
+}
+
+.popup p {
+  margin-bottom: 15px; /* Espace entre le texte et le bouton */
 }
 </style>
 

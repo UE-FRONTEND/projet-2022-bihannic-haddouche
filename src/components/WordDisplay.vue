@@ -31,7 +31,7 @@
 
 
   
-  <style>
+  <style scoped>
   .word-display {
     display: flex;
     justify-content: center;
