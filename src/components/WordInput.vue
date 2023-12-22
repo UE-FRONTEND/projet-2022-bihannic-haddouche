@@ -4,6 +4,7 @@
             type="text"
             v-model="word"
             @input="validateInput"
+            @keyup.enter="submitWord"
             placeholder="Entrez un mot de 5 lettres"
             maxlength="5"
         />

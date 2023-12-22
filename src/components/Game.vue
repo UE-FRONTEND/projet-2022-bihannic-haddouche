@@ -1,12 +1,12 @@
 <template>
-    <WordFetcher @new-word="setRandomWord"/>
+    <WordFetcher ref="wordFetcher" @new-word="setRandomWord"/>
     <div class="word-attempts">
         <WordDisplay 
         v-for="(word, index) in wordAttempts" 
         :key="index" 
         :proposedWord="word" 
         :targetWord="targetWord"
-        />
+    />
     </div>
     <WordInput @submit-word="handleWordSubmit"/>
 
@@ -14,6 +14,15 @@
         <p>{{ popupMessage }}</p>
         <button @click="closePopup">OK</button>
     </div>
+
+    <EndGamePopup 
+        :isVisible="isGameOver" 
+        :result="gameResult" 
+        :attempts="wordAttempts.length" 
+        :time="elapsedTime" 
+        @close="isGameOver = false" 
+        @replay="replayGame"
+    />
 </template>
 
 <script>
@@ -22,6 +31,7 @@ import axios from 'axios';
 import WordFetcher from "./WordFetcher";
 import WordInput from "./WordInput";
 import WordDisplay from './WordDisplay';
+import EndGamePopup from './EndGamePopup.vue';
 import 'simple-keyboard/build/css/index.css';
 
 export default {
@@ -29,7 +39,8 @@ export default {
     components: {
     WordFetcher,
     WordInput,
-    WordDisplay
+    WordDisplay,
+    EndGamePopup
     },
     emits: ['submitWord'],
     data() {
@@ -37,7 +48,10 @@ export default {
             targetWord: '',
             wordAttempts: [],
             showPopup: false,
-            popupMessage: ''
+            popupMessage: '',
+            isGameOver: false,
+            gameResult: 'victory',
+            elapsedTime: '00:00'
         };
     },
     methods: {
@@ -48,25 +62,42 @@ export default {
 
         async submitWord(word) {
             try {
-                const response = await axios.post('https://vue-project-backend-eta.vercel.app/api/check-word', { 
-                    word: word
-                });
-                if (response.data.isWord) {
-                    this.wordAttempts.push(word);
+            const response = await axios.post('https://vue-project-backend-eta.vercel.app/api/check-word', { 
+                word: word
+            });
+
+            if (response.data.isWord) {
+                this.wordAttempts.push(word);
+
+                if (word === this.targetWord) {
+                this.isGameOver = true;
+                this.gameResult = 'victory';
+                } else if (this.wordAttempts.length === 6) {
+                this.isGameOver = true;
+                this.gameResult = 'defeat';
                 }
-                else {
-                    this.showPopup = true;
-                    this.popupMessage = "Le mot n'est pas dans le dictionnaire.";
-                }
-                console.log(response.data);
+            } else {
+                this.showPopup = true;
+                this.popupMessage = "Le mot n'est pas dans le dictionnaire.";
+            }
             } catch (error) {
-                console.error("Erreur lors de l'envoi du mot à l'API:", error);
+            console.error("Erreur lors de l'envoi du mot à l'API:", error);
             }
         },
 
         setRandomWord(word) {
             this.targetWord = word;
             console.log("Mot aléatoire reçu:", word);
+        },
+
+        replayGame() {
+            this.wordAttempts = [];
+            this.isGameOver = false;
+            this.fetchNewWord();
+        },
+
+        fetchNewWord() {
+            this.$refs.wordFetcher.fetchRandomWord();
         },
 
         closePopup() {
