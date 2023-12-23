@@ -1,11 +1,10 @@
 <template>
 
- <div>
-    <router-link to="/jeu" tag="button" id="btn-demarrer-partie" class="bg-blue-600 px-4 py-2 text-white text-center rounded font-bold shadow">
-      Demarrer une partie
-    </router-link>
-  </div>
-  <router-view></router-view>
+   <h1 class="text-center font-bold text-4xl">Mot Mystère</h1>
+
+      <router-view></router-view>
+
+
 
 </template>
 
@@ -14,18 +13,9 @@
 
 import Chronometre from "@/components/Chronometre.vue";
 import WordInput from './components/WordInput.vue';
+import Historique from "@/components/Historique.vue";
 export default {
   name: 'App',
-  components: {Chronometre,WordInput},
-  methods: {
-    handleWordSubmit(word) {
-      // Logique pour gérer le mot soumis
-      console.log("Mot soumis:", word);
-    },
-    showStats() {
-      // Logique pour afficher les statistiques
-    }
-  }
 }
 
 </script>
@@ -59,6 +49,37 @@ button:hover {
 
 .info-section {
   margin-top: 20px;
+}
+
+/*-------------------------------------*/
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0; /* Couleur de fond */
+  margin: auto;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+h1 {
+  color: #2c3e50; /* Couleur du texte */
+  text-shadow: 2px 2px 4px #555; /* Ombre du texte */
+  padding: 10px;
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Légère ombre portée */
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-4xl {
+  font-size: 2.5em;
 }
 </style>
 
