@@ -1,5 +1,6 @@
 <template>
     <WordFetcher ref="wordFetcher" @new-word="setRandomWord"/>
+    <chronometre/>
     <div class="word-attempts">
         <WordDisplay 
         v-for="(word, index) in wordAttempts" 
@@ -32,6 +33,7 @@ import WordFetcher from "./WordFetcher";
 import WordInput from "./WordInput";
 import WordDisplay from './WordDisplay';
 import EndGamePopup from './EndGamePopup.vue';
+import Chronometre from "@/components/Chronometre.vue";
 import 'simple-keyboard/build/css/index.css';
 
 export default {
@@ -40,7 +42,8 @@ export default {
     WordFetcher,
     WordInput,
     WordDisplay,
-    EndGamePopup
+    EndGamePopup,
+    Chronometre,
     },
     emits: ['submitWord'],
     data() {
