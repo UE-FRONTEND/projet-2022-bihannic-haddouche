@@ -6,7 +6,6 @@
     </router-link>
   </div>-->
   <div id="app">
-    <chronometre/>
     <h1>Jeu du mot</h1>
     <h3>Mokrane Haddouche, Lucas Bihannic TP51</h3>
     <game @submit-word="handleWordSubmit"></game>
@@ -21,11 +20,10 @@
 
 
 import Game from '@/components/Game.vue';
-import Chronometre from "@/components/Chronometre.vue";
-import WordInput from './components/WordInput.vue';
+
 export default {
   name: 'App',
-  components: {Chronometre,WordInput,Game},
+  components: {Game},
   methods: {
     handleWordSubmit(word) {
       // Logique pour gérer le mot soumis
