@@ -8,7 +8,8 @@
   <div id="app">
     <chronometre/>
     <h1>Jeu du mot</h1>
-    <word-input @submit-word="handleWordSubmit"></word-input>
+    <h3>Mokrane Haddouche, Lucas Bihannic TP51</h3>
+    <game @submit-word="handleWordSubmit"></game>
     <button @click="showStats">Statistiques</button>
     <div class="info-section">
       <p>Bienvenue dans le Jeu du mot! Trouvez le mot mystère en 6 tentatives.</p>
@@ -19,11 +20,12 @@
 <script>
 
 
+import Game from '@/components/Game.vue';
 import Chronometre from "@/components/Chronometre.vue";
 import WordInput from './components/WordInput.vue';
 export default {
   name: 'App',
-  components: {Chronometre,WordInput},
+  components: {Chronometre,WordInput,Game},
   methods: {
     handleWordSubmit(word) {
       // Logique pour gérer le mot soumis
@@ -39,7 +41,7 @@ export default {
 
 
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
