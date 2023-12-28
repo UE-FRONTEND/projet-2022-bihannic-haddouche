@@ -40,6 +40,7 @@ import WordFetcher from "./WordFetcher";
 import WordInput from "./WordInput";
 import WordDisplay from './WordDisplay';
 import EndGamePopup from './EndGamePopup.vue';
+
 import 'simple-keyboard/build/css/index.css';
 
 export default {
@@ -49,7 +50,8 @@ export default {
     WordFetcher,
     WordInput,
     WordDisplay,
-    EndGamePopup
+    EndGamePopup,
+
     },
     emits: ['submitWord'],
     data() {
