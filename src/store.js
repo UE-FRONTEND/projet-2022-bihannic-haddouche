@@ -44,5 +44,9 @@ export const store = createStore({
             state.minutes = 10
             state.secondes = 0
         },
+        stopChrono(state) {
+            clearInterval(state.chrono);
+            state.chrono = 0;
+        },
     }
 })

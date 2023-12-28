@@ -1,40 +1,17 @@
 <template>
+   <h1 class="text-center font-bold text-4xl">Mot Mystère</h1>
 
- <!-- <div>
-    <router-link to="/jeu" tag="button" id="btn-demarrer-partie" class="bg-blue-600 px-4 py-2 text-white text-center rounded font-bold shadow">
-      Demarrer une partie
-    </router-link>
-  </div>-->
-  <div id="app">
-    <chronometre/>
-    <h1>Jeu du mot</h1>
-    <h3>Mokrane Haddouche, Lucas Bihannic TP51</h3>
-    <game @submit-word="handleWordSubmit"></game>
-    <button @click="showStats">Statistiques</button>
-    <div class="info-section">
-      <p>Bienvenue dans le Jeu du mot! Trouvez le mot mystère en 6 tentatives.</p>
-    </div>
-  </div>
+      <router-view></router-view>
+
+
+
 </template>
 
 <script>
 
-
-import Game from '@/components/Game.vue';
-import Chronometre from "@/components/Chronometre.vue";
-import WordInput from './components/WordInput.vue';
 export default {
   name: 'App',
-  components: {Chronometre,WordInput,Game},
-  methods: {
-    handleWordSubmit(word) {
-      // Logique pour gérer le mot soumis
-      console.log("Mot soumis:", word);
-    },
-    showStats() {
-      // Logique pour afficher les statistiques
-    }
-  }
+
 }
 
 </script>
@@ -48,7 +25,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 button {
@@ -68,6 +45,37 @@ button:hover {
 
 .info-section {
   margin-top: 20px;
+}
+
+/*-------------------------------------*/
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0; /* Couleur de fond */
+  margin: auto;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+h1 {
+  color: #2c3e50; /* Couleur du texte */
+  text-shadow: 2px 2px 4px #555; /* Ombre du texte */
+  padding: 10px;
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Légère ombre portée */
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-4xl {
+  font-size: 2.5em;
 }
 </style>
 

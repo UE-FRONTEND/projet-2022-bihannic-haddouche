@@ -9,6 +9,9 @@
             maxlength="5"
         />
         <button @click="submitWord">Valider</button>
+        <button @click="abandonGame" class="btn-abandon">Abandonner</button>
+
+
         <p :class="{ 'error-message': error, 'valid-message': !error && word.length === 5 }">
             {{ errorMessage }}
         </p>
@@ -59,16 +62,21 @@ export default {
             if (button === "{enter}") {
                 this.submitWord();
             }
-        }
+        },
+        abandonGame() {
+          // Émettre un événement pour signaler l'abandon
+          this.$emit('abandon-game');
+          this.$store.commit("stopChrono");
+        },
     }
 };
 </script>
 
 <style scoped>
 .word-input {
-  max-width: 400px;
+  max-width: 500px;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   background-color: #f9f9f9;
@@ -86,12 +94,13 @@ export default {
   font-size: 18px;
 }
 
+/* Style pour le bouton "Valider" */
 .word-input button {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: #1cdf24;
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 3px 0 0px 0; /* Espacement du bas réduit à 20px */
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -102,9 +111,22 @@ export default {
   background-color: #45a049;
 }
 
+.word-input .btn-abandon {
+  background-color: #FF0000; /* Rouge */
+  color: #FFFFFF; /* Blanc */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.word-input .btn-abandon:hover {
+  background-color: #CC0000; /* Rouge plus foncé au survol */
+}
+
 .word-input p {
   min-height: 20px;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   margin-top: 10px;
 }

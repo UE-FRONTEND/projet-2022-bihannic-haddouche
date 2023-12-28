@@ -16,6 +16,11 @@
 <script>
 export default {
   name : "Chronometre",
+  data() {
+    return {
+      formattedTime: "00:00",
+    };
+  },
   computed: {
     minutes() {
       return this.$store.getters.getMinutes
@@ -25,16 +30,39 @@ export default {
     },
     chrono() {
       return this.$store.getters.getChrono
-    }
+    },
+   /* formattedTime() {
+      return `${('0' + this.minutes).slice(-2)}:${('0' + this.secondes).slice(-2)}`;
+    },*/
   },
+
+ /* watch: {
+    minutes() {
+      this.updateFormattedTime();
+    },
+    secondes() {
+      this.updateFormattedTime();
+    },
+  },*/
+
   mounted() {
     window.clearInterval(this.$store.getters.getChrono)
-    this.$store.commit('restartChrono')
+    this.$store.commit('restartChrono');
+
     const chrono = window.setInterval(() => {
-      this.$store.dispatch('decrementChrono')
+      this.$store.dispatch('decrementChrono');
+      if (this.minutes === 0 && this.secondes === 0) {
+        this.$emit("time-up"); // Émet l'événement "time-up" lorsque le temps est écoulé
+      }
     }, 1000)
     this.$store.commit('setChrono', chrono)
-  }
+  },
+  /*methods: {
+    updateFormattedTime() {
+      const formattedTime = `${("0" + this.minutes).slice(-2)}:${("0" + this.secondes).slice(-2)}`;
+      this.$emit("update-time", formattedTime); // Émet l'événement "update-time" avec la nouvelle valeur
+    },
+  },*/
 }
 </script>
 

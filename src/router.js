@@ -1,18 +1,27 @@
 import { createWebHistory, createRouter } from "vue-router";
 import App from "@/App";
-import Jeu from "@/Jeu.vue";
+import Home from "@/components/Home.vue";
+import Historique from "@/components/Historique.vue";
+import Game from "@/components/Game.vue";
+import EndGamePopup from "@/components/EndGamePopup.vue";
 
 const routes = [
     {
         path: "/",
         name: "Home",
-        component: App, /* <--- Change it */
+        component: Home,
     },
     {
         path: "/jeu",
         name: "Jeu",
-        component: Jeu,
+        component: Game,
     },
+    {
+        path: "/historique",
+        name: "historique",
+        component: Historique,
+    },
+
 ];
 
 const router = createRouter({
