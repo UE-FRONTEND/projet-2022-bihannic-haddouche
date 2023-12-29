@@ -84,12 +84,13 @@ export default {
                 if (word === this.targetWord) {
                 this.isGameOver = true;
                 this.gameResult = 'victory';
-
+                  this.$store.commit("stopChrono");
                 } else if (this.wordAttempts.length === 6) {
                 this.isGameOver = true;
                 this.gameResult = 'defeat';
+                  this.$store.commit("stopChrono");
                 }
-              this.$store.commit("stopChrono");
+
 
               /*this.$store.commit("stopChrono");*/
             } else {
