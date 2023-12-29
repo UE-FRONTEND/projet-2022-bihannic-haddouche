@@ -86,6 +86,7 @@ export default {
                 this.gameResult = 'victory';
                   this.$store.commit("stopChrono");
                 } else if (this.wordAttempts.length === 6) {
+                this.$store.commit("stopChrono");
                 this.isGameOver = true;
                 this.gameResult = 'defeat';
                   this.$store.commit("stopChrono");
