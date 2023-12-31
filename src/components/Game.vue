@@ -2,6 +2,7 @@
   <div class="game-container">
   <div>
     <Chronometre class="chronometre-style" @time-up="handleTimeUp" />
+    <p class="tentatives-message">{{ tentativesRestantes }} tentatives restantes</p>
   </div>
   </div>
 
@@ -27,6 +28,7 @@
         :result="gameResult" 
         :attempts="wordAttempts.length" 
         :time="calculateElapsedTime()"
+        :motADeviner="motADeviner"
         @close="isGameOver = false"
         @replay="replayGame"
     />
@@ -58,11 +60,13 @@ export default {
         return {
             targetWord: '',
             wordAttempts: [],
+          tentativesRestantes: 6,
             showPopup: false,
             popupMessage: '',
             isGameOver: false,
             gameResult: 'victory',
             timeUp:false,
+          motADeviner:'',
 
         };
     },
@@ -80,16 +84,38 @@ export default {
 
             if (response.data.isWord) {
                 this.wordAttempts.push(word);
-
+              this.tentativesRestantes = 6 - this.wordAttempts.length;
                 if (word === this.targetWord) {
                 this.isGameOver = true;
                 this.gameResult = 'victory';
+
                   this.$store.commit("stopChrono");
+
+                  const partie = {
+                    date: new Date(),
+                    tentatives: this.wordAttempts.length,
+                    temps: this.calculateElapsedTime(),
+                    reussite: true,
+                    motADeviner: this.targetWord,
+                  };
+
+                  this.$store.commit("addPartieToHistorique", partie);
                 } else if (this.wordAttempts.length === 6) {
                 this.$store.commit("stopChrono");
                 this.isGameOver = true;
                 this.gameResult = 'defeat';
+                this.motADeviner=this.targetWord;
                   this.$store.commit("stopChrono");
+
+                  const partie = {
+                    date: new Date(),
+                    tentatives: this.wordAttempts.length,
+                    temps: this.calculateElapsedTime(),
+                    reussite: false,
+                    motADeviner: this.targetWord,
+                  };
+
+                  this.$store.commit("addPartieToHistorique", partie);
                 }
 
 
@@ -128,11 +154,31 @@ export default {
           this.gameResult = 'defeat';
           this.$store.commit("stopChrono");
           this.timeUp = true;
-         /* this.elapsedTime = this.calculateElapsedTime(); // Calculer le temps écoulé ici*/
+          this.motADeviner=this.targetWord;
+
+          const partie = {
+            date: new Date(),
+            tentatives: this.wordAttempts.length,
+            temps:this.calculateElapsedTime(),
+            reussite: false,
+            motADeviner: this.targetWord,
+          };
+
+          this.$store.commit("addPartieToHistorique", partie);
         },
         handleAbandonGame() {
           this.isGameOver = true;
           this.gameResult = 'defeat';
+          this.motADeviner=this.targetWord;
+          const partie = {
+            date: new Date(),
+            tentatives: this.wordAttempts.length,
+            temps: this.calculateElapsedTime(),
+            reussite: false,
+            motADeviner: this.targetWord,
+          };
+
+          this.$store.commit("addPartieToHistorique", partie);
         },
 
       /*updateFormattedTime(newTime) {
@@ -165,7 +211,7 @@ export default {
 .game-container {
   max-width: 600px;
   margin: auto;
-  padding: 20px;
+  padding: 5px;
   text-align: center;
 }
 
@@ -222,5 +268,11 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-weight: 1000;
 }
+.tentatives-message {
+  font-size: 20px;
+  color: #333;
+  margin-top: 10px;
+}
+
 </style>
 

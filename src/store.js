@@ -6,6 +6,7 @@ export const store = createStore({
             minutes: 10,
             secondes: 0,
             chrono: 0,
+            historique: [],
         }
     },
     actions: {
@@ -29,6 +30,7 @@ export const store = createStore({
         getChrono(state){
             return state.chrono
         }
+
     },
     mutations: {
         setMinutes(state, minutes) {
@@ -47,6 +49,9 @@ export const store = createStore({
         stopChrono(state) {
             clearInterval(state.chrono);
             state.chrono = 0;
+        },
+        addPartieToHistorique(state, partie) {
+            state.historique.push(partie);
         },
     }
 })
