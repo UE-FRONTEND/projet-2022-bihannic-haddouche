@@ -38,10 +38,8 @@
         let letterStates = {};
         for (let i = 0; i < this.proposedWord.length; i++) {
           let letter = this.proposedWord[i];
-          if(this.getLetterClass(letter, i) != "absent"){
-            let cls = this.getLetterClass(letter, i);
-            letterStates[letter] = cls; // cls est l'état de la lettre ('correct', 'present', 'absent')
-          }
+          let cls = this.getLetterClass(letter, i);
+          letterStates[letter] = cls; // cls est l'état de la lettre ('correct', 'present', 'absent')
         }
         this.$emit('letter-states', letterStates);
       },
