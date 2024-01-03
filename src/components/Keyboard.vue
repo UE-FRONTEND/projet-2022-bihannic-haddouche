@@ -54,15 +54,19 @@
         });
       },
       updateKeyStyles(letterStates) {
-        console.log(letterStates)
-      for (const [letter, state] of Object.entries(letterStates)) {
-        let buttonElement = this.keyboard.getButtonElement(letter);
-        if (buttonElement) {
-          buttonElement.className = `hg-button ${state}`;
-        }
-      }
-    },
+        for (const [letter, newState] of Object.entries(letterStates)) {
+          let buttonElement = this.keyboard.getButtonElement(letter);
+          if (buttonElement) {
+            // Continuer si la touche est déjà verte et le nouvel état est jaune
+            if (buttonElement.classList.contains('correct') && newState === 'present') {
+              continue;
+            }
 
+            // Mise à jour de la classe de la touche
+            buttonElement.className = `hg-button ${newState}`;
+          }
+        }
+      },
     },
     watch: {
       input(input) {
