@@ -15,7 +15,12 @@
         <p :class="{ 'error-message': error, 'valid-message': !error && word.length === 5 }">
             {{ errorMessage }}
         </p>
-        <Keyboard @onChange="onChange" @onKeyPress="onKeyPress" :input="word"/>
+        <Keyboard ref="keyboard"
+          @onChange="onChange" 
+          @onKeyPress="onKeyPress" 
+          :input="word" 
+          :keyStates="keyStates"
+        />
     </div>
 </template>
 
@@ -32,7 +37,8 @@ export default {
         return {
             word: '',
             error: true,
-            errorMessage: 'Le mot doit être composé de 5 lettres'
+            errorMessage: 'Le mot doit être composé de 5 lettres',
+            keyStates: {}, 
         };
     },
     methods: {
@@ -67,6 +73,12 @@ export default {
           // Émettre un événement pour signaler l'abandon
           this.$emit('abandon-game');
           this.$store.commit("stopChrono");
+        },
+        updateKeyStates(letterStates) {
+          // Transmettre les états au clavier
+          if (this.$refs.keyboard) {
+            this.$refs.keyboard.updateKeyStyles(letterStates);
+          }
         },
     }
 };

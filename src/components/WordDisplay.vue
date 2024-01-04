@@ -1,17 +1,28 @@
 <template>
-    <div class="word-display">
-      <span v-for="(letter, index) in proposedWord" :key="index" :class="getLetterClass(letter, index)">
-        {{ letter }}
-      </span>
-    </div>
-  </template>
+  <div class="word-display">
+    <span
+      v-for="(letter, index) in proposedWord"
+      :key="index"
+      :class="getLetterClass(letter, index)">
+      {{ letter }}
+    </span>
+  </div>
+</template>
   
-  <script>
+<script>
   export default {
     name: 'WordDisplay',
     props: {
       proposedWord: String,
       targetWord: String
+    },
+    mounted() {
+      this.emitLetterStates();
+    },
+    watch: {
+      proposedWord() {
+        this.emitLetterStates();
+      }
     },
     methods: {
       getLetterClass(letter, index) {
@@ -22,10 +33,19 @@
         } else {
           return 'absent'; // Lettre incorrecte
         }
-      }
+      },
+      emitLetterStates() {
+        let letterStates = {};
+        for (let i = 0; i < this.proposedWord.length; i++) {
+          let letter = this.proposedWord[i];
+          let cls = this.getLetterClass(letter, i);
+          letterStates[letter] = cls; // cls est l'état de la lettre ('correct', 'present', 'absent')
+        }
+        this.$emit('letter-states', letterStates);
+      },
     }
   };
-  </script>
+</script>
   
 
 

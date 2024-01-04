@@ -9,14 +9,15 @@
     <WordFetcher ref="wordFetcher" @new-word="setRandomWord"/>
 
     <div class="word-attempts">
-        <WordDisplay 
+      <WordDisplay 
         v-for="(word, index) in wordAttempts" 
         :key="index" 
         :proposedWord="word" 
         :targetWord="targetWord"
-    />
+        @letter-states="handleLetterStates"
+      />
     </div>
-    <WordInput @submit-word="handleWordSubmit" @abandon-game="handleAbandonGame"/>
+    <WordInput ref="wordInput" @submit-word="handleWordSubmit" @abandon-game="handleAbandonGame"/>
 
     <div v-if="showPopup" class="popup">
         <p>{{ popupMessage }}</p>
@@ -70,6 +71,7 @@ export default {
 
         };
     },
+
     methods: {
 
         handleWordSubmit(submittedWord) {
@@ -201,7 +203,13 @@ export default {
         return `${('0' + elapsedMinutes).slice(-2)}:${('0' + elapsedSeconds).slice(-2)}`;
       },
 
-    }
+      handleLetterStates(letterStates) {
+        if (this.$refs.wordInput) {
+          this.$refs.wordInput.updateKeyStates(letterStates);
+        }
+      },
+
+  }
 };
 </script>
 
