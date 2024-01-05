@@ -148,23 +148,7 @@ export default {
     background-color: #5F9EA0; /* Bleu clair plus foncé au survol */
   }
 
-  /* Style pour le bouton "Redémarrer une partie" */
-  .btn-demarrer-partie {
-    background-color: #1cdf24; /* Vert */
-    color: #ffffff; /* Blanc */
-    padding: 10px 20px; /* Ajustez les valeurs de rembourrage selon vos besoins */
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
 
-  .btn-demarrer-partie:hover {
-    background-color: #45A049; /* Vert plus foncé au survol */
-  }
   </style>
   
   

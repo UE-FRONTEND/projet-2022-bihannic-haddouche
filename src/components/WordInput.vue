@@ -72,7 +72,7 @@ export default {
         abandonGame() {
           // Émettre un événement pour signaler l'abandon
           this.$emit('abandon-game');
-          this.$store.commit("stopChrono");
+          //this.$store.commit("stopChrono");
         },
         updateKeyStates(letterStates) {
           // Transmettre les états au clavier

@@ -1,9 +1,14 @@
 <template>
-  <div class="game-container">
-  <div>
-    <Chronometre class="chronometre-style" @time-up="handleTimeUp" />
-    <p class="tentatives-message">{{ tentativesRestantes }} tentatives restantes</p>
+  <div class="header">
+    <div class="home-button" @click="handleAbandonGame">Revenir à la page d'accueil</div>
   </div>
+  <div class="game-container">
+
+      <div class="center-container">
+        <Chronometre class="chronometre-style" @time-up="handleTimeUp" />
+        <p class="tentatives-message">{{ tentativesRestantes }} tentatives restantes</p>
+      </div>
+
   </div>
 
     <WordFetcher ref="wordFetcher" @new-word="setRandomWord"/>
@@ -18,7 +23,6 @@
       />
     </div>
     <WordInput ref="wordInput" @submit-word="handleWordSubmit" @abandon-game="handleAbandonGame"/>
-
     <div v-if="showPopup" class="popup">
         <p>{{ popupMessage }}</p>
         <button @click="closePopup">OK</button>
@@ -31,7 +35,6 @@
         :time="calculateElapsedTime()"
         :motADeviner="motADeviner"
         @close="isGameOver = false"
-        @replay="replayGame"
     />
 </template>
 
@@ -120,8 +123,6 @@ export default {
                   this.$store.commit("addPartieToHistorique", partie);
                 }
 
-
-              /*this.$store.commit("stopChrono");*/
             } else {
                 this.showPopup = true;
                 this.popupMessage = "Le mot n'est pas dans le dictionnaire.";
@@ -134,12 +135,6 @@ export default {
         setRandomWord(word) {
             this.targetWord = word;
             console.log("Mot aléatoire reçu:", word);
-        },
-
-        replayGame() {
-            this.wordAttempts = [];
-            this.isGameOver = false;
-            this.fetchNewWord();
         },
 
         fetchNewWord() {
@@ -169,6 +164,7 @@ export default {
           this.$store.commit("addPartieToHistorique", partie);
         },
         handleAbandonGame() {
+          this.$store.commit("stopChrono");
           this.isGameOver = true;
           this.gameResult = 'defeat';
           this.motADeviner=this.targetWord;
@@ -183,9 +179,6 @@ export default {
           this.$store.commit("addPartieToHistorique", partie);
         },
 
-      /*updateFormattedTime(newTime) {
-        this.formattedTime =newTime
-      },*/
       calculateElapsedTime() {
         if (this.timeUp) {
           // Si le jeu est terminé par une défaite (time-up), retournez "10:00"
@@ -218,9 +211,38 @@ export default {
 <style scoped>
 .game-container {
   max-width: 600px;
-  margin: auto;
-  padding: 5px;
+  margin: -40px auto 5px auto;
+  padding: 0px;
   text-align: center;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 0px; /* Augmentation de la marge à gauche */
+  margin-right: 0px; /* Ajout de marge à droite */
+}
+.home-button {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-align: left; /* Alignement du texte à gauche */
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #2980b9;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .word-attempts {
@@ -259,16 +281,15 @@ export default {
   margin-bottom: 15px; /* Espace entre le texte et le bouton */
 }
 
-
-.game-container {
+/*.game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 0vh; /* Garantit que le conteneur occupe au moins la hauteur de la fenêtre */
-}
+  min-height: 0vh; /* Garantit que le conteneur occupe au moins la hauteur de la fenêtre *
+}*/
 .chronometre-style {
-  font-size: 30px;
+  font-size: 40px;
   color: #333;
   background-color: #f8f8f8;
   padding: 1px;
@@ -280,6 +301,21 @@ export default {
   font-size: 20px;
   color: #333;
   margin-top: 10px;
+}
+.home-button {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.home-button:hover {
+  background-color: #2980b9; /* Changement de couleur lors du survol */
 }
 </style>
 

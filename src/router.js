@@ -3,7 +3,6 @@ import App from "@/App";
 import Home from "@/components/Home.vue";
 import Historique from "@/components/Historique.vue";
 import Game from "@/components/Game.vue";
-import EndGamePopup from "@/components/EndGamePopup.vue";
 
 const routes = [
     {

@@ -31,19 +31,7 @@ export default {
     chrono() {
       return this.$store.getters.getChrono
     },
-   /* formattedTime() {
-      return `${('0' + this.minutes).slice(-2)}:${('0' + this.secondes).slice(-2)}`;
-    },*/
   },
-
- /* watch: {
-    minutes() {
-      this.updateFormattedTime();
-    },
-    secondes() {
-      this.updateFormattedTime();
-    },
-  },*/
 
   mounted() {
     window.clearInterval(this.$store.getters.getChrono)
@@ -57,12 +45,6 @@ export default {
     }, 1000)
     this.$store.commit('setChrono', chrono)
   },
-  /*methods: {
-    updateFormattedTime() {
-      const formattedTime = `${("0" + this.minutes).slice(-2)}:${("0" + this.secondes).slice(-2)}`;
-      this.$emit("update-time", formattedTime); // Émet l'événement "update-time" avec la nouvelle valeur
-    },
-  },*/
 }
 </script>
 
