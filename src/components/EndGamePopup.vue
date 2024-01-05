@@ -3,6 +3,7 @@
     <div class="popup-content" :class="{ victory: result === 'victory', defeat: result === 'defeat' }">
 
       <h2>{{ resultMessage }}</h2>
+      <p v-if="result === 'defeat'">Le mot était : {{ motADeviner }}</p>
       <p>Nombre de tentatives : {{ attempts }}</p>
       <p>Temps écoulé : {{ time }}</p>
       <div style="margin-bottom: 50px;">
@@ -38,14 +39,17 @@ export default {
     time: {
       type: String,
       default: '00:00' // Le format du temps est à définir
+    },
+    motADeviner: {
+      type: String,
+      default: ''
     }
-
   },
 
 
   computed: {
     resultMessage() {
-      return this.result === 'victory' ? 'Félicitations ! Vous avez trouvé le mot !' : 'Dommage ! Réessayez.';
+      return this.result === 'victory' ? 'Félicitations ! Vous avez trouvé le mot !' : 'Dommage ! Réessayez.' ;
     }
   },
   methods: {
